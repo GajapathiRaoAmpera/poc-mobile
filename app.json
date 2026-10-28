@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Ampera",
+    "slug": "ampera-poc",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ai.amperatech.poc"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FCFCFC",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "ai.amperatech.poc"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-web-browser",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/brand/ampera-mark.png",
+          "imageWidth": 72,
+          "backgroundColor": "#FCFCFC"
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Switzer-Light.ttf",
+            "./assets/fonts/Switzer-Regular.ttf",
+            "./assets/fonts/Switzer-Medium.ttf",
+            "./assets/fonts/FragmentMono-Regular.ttf"
+          ]
+        }
+      ],
+      "expo-image"
+    ],
+    "scheme": "ampera",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
