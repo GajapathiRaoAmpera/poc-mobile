@@ -1,6 +1,6 @@
 # poc-mobile — run `make` or `make help` to list targets.
 .DEFAULT_GOAL := help
-.PHONY: help install env add start start-clear android ios typecheck lint test test-watch \
+.PHONY: help install env add start start-clear android ios apk typecheck lint test test-watch \
         test-file doctor fix-deps check clean
 
 help: ## List targets
@@ -29,6 +29,13 @@ android: ## Build + run on Android device/emulator
 
 ios: ## Build + run on iOS simulator (macOS only)
 	npm run ios
+
+apk: ## Point the app at this laptop's current Wi-Fi IP and build the release APK
+	@IP=$$(ip route get 1.1.1.1 | awk '{for(i=1;i<=NF;i++) if($$i=="src") print $$(i+1)}'); \
+	printf 'EXPO_PUBLIC_API_URL=http://%s:8000\nEXPO_PUBLIC_WEB_URL=http://%s:3000\n' $$IP $$IP > .env.local; \
+	echo "Building APK for http://$$IP:8000"
+	cd android && ./gradlew assembleRelease
+	@echo "APK: android/app/build/outputs/apk/release/app-release.apk"
 
 ## --- Quality ---
 typecheck: ## TypeScript check
