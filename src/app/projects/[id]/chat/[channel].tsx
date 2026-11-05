@@ -1,10 +1,10 @@
 import { FlashList } from "@shopify/flash-list";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
 import { useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ArrowUp, MessagesSquare } from "lucide-react-native";
+import { ArrowUp, AudioLines, MessagesSquare } from "lucide-react-native";
 import { errorMessage } from "@/api/client";
 import { useMessages, useSendMessage } from "@/api/conversations";
 import { useDelivery } from "@/api/delivery";
@@ -104,16 +104,29 @@ export default function ChatScreen() {
             maxLength={4000}
             style={styles.input}
           />
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Send"
-            accessibilityState={{ disabled: !draft.trim() || send.isPending }}
-            disabled={!draft.trim() || send.isPending}
-            onPress={() => submit()}
-            style={[styles.send, (!draft.trim() || send.isPending) && styles.sendOff]}
-          >
-            {send.isPending ? <ActivityIndicator size="small" color={color.primaryFg} /> : <ArrowUp size={20} color={color.primaryFg} />}
-          </Pressable>
+          {draft.trim() || send.isPending ? (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Send"
+              accessibilityState={{ disabled: send.isPending, busy: send.isPending }}
+              disabled={send.isPending}
+              onPress={() => submit()}
+              style={[styles.send, send.isPending && styles.sendOff]}
+            >
+              {send.isPending ? <ActivityIndicator size="small" color={color.primaryFg} /> : <ArrowUp size={20} color={color.primaryFg} />}
+            </Pressable>
+          ) : (
+            // Empty composer: the same spot opens voice mode, like a phone keyboard's mic.
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Voice mode"
+              accessibilityHint="Run the delivery by voice with all agents"
+              onPress={() => router.push(`/projects/${id}/voice`)}
+              style={styles.send}
+            >
+              <AudioLines size={20} color={color.primaryFg} />
+            </Pressable>
+          )}
         </View>
       </View>
     </KeyboardAvoidingView>

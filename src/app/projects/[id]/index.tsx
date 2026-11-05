@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { FileQuestion, MessagesSquare } from "lucide-react-native";
+import { AudioLines, FileQuestion, MessagesSquare } from "lucide-react-native";
 import { ApiError } from "@/api/client";
 import { useDelivery } from "@/api/delivery";
 import { useProject } from "@/api/projects";
@@ -8,6 +8,7 @@ import { useWorkflow } from "@/api/workflow";
 import { PROJECT_STATUS, relativeTime } from "@/lib/format";
 import { GateCard } from "@/features/workflow/gate-card";
 import { StageList } from "@/features/workflow/stage-list";
+import { Button } from "@/ui/button";
 import { Badge, Card, Row } from "@/ui/card";
 import { EmptyState, ErrorState, Skeleton } from "@/ui/states";
 import { Text } from "@/ui/text";
@@ -56,6 +57,14 @@ export default function ProjectScreen() {
       ) : (
         <Skeleton style={styles.titleSkeleton} />
       )}
+
+      <Button
+        label="Voice mode"
+        accessibilityHint="Run the whole delivery by voice: hear updates, answer questions and approve drafts"
+        icon={<AudioLines size={20} color={color.primaryFg} />}
+        block
+        onPress={() => router.push(`/projects/${id}/voice`)}
+      />
 
       {delivery.data ? <GateCard projectId={id} delivery={delivery.data} /> : delivery.isPending ? <Skeleton style={styles.gateSkeleton} /> : null}
 

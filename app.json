@@ -46,8 +46,25 @@
       "expo-image",
       [
         "expo-build-properties",
-        { "android": { "usesCleartextTraffic": true } }
-      ]
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      [
+        "react-native-audio-api",
+        {
+          "iosMicrophonePermission": "Ampera uses the microphone so you can talk with your project's agents.",
+          "iosBackgroundMode": false,
+          "androidPermissions": [
+            "android.permission.RECORD_AUDIO",
+            "android.permission.MODIFY_AUDIO_SETTINGS"
+          ],
+          "androidForegroundService": false
+        }
+      ],
+      "expo-asset"
     ],
     "scheme": "ampera",
     "experiments": {

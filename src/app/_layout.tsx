@@ -47,6 +47,10 @@ function RootStack() {
         <Stack.Screen name="projects/[id]/index" options={{ title: "" }} />
         <Stack.Screen name="projects/[id]/[stage]" options={{ title: "" }} />
         <Stack.Screen name="projects/[id]/chat/[channel]" options={{ title: "" }} />
+        <Stack.Screen
+          name="projects/[id]/voice"
+          options={{ presentation: "fullScreenModal", headerShown: false, animation: "fade" }}
+        />
       </Stack.Protected>
     </Stack>
   );

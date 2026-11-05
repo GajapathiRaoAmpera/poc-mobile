@@ -16,6 +16,7 @@ export interface Message {
     change_set_id?: string;
     plan_version?: number;
     gate?: string;
+    progress?: boolean;
   };
   created_at: string;
 }
