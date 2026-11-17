@@ -1,0 +1,50 @@
+name: ampera
+description: "Ampera mobile app for regular users"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  flutter_secure_storage: ^11.2.0
+  url_launcher: ^6.3.3
+  web_socket_channel: ^3.0.3
+  record: ^7.2.0
+  flutter_pcm_sound: ^3.3.3
+  audio_session: ^0.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/brand/
+  fonts:
+    - family: Switzer
+      fonts:
+        - asset: assets/fonts/Switzer-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Switzer-Regular.ttf
+        - asset: assets/fonts/Switzer-Medium.ttf
+          weight: 500
+    - family: FragmentMono
+      fonts:
+        - asset: assets/fonts/FragmentMono-Regular.ttf
+
+# `make icons` regenerates the launcher icons from these.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon.png
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FCFCFC"
+  adaptive_icon_foreground: assets/android-icon-foreground.png
+  adaptive_icon_monochrome: assets/android-icon-monochrome.png
